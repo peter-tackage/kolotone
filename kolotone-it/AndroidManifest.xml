@@ -8,6 +8,7 @@
 
   <instrumentation android:targetPackage="com.moac.android.kolotone"
     android:name="android.test.InstrumentationTestRunner" />
+  <uses-sdk android:minSdkVersion="8"/>
 
 </manifest>
 
