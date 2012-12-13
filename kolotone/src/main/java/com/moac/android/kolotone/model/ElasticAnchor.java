@@ -1,11 +1,12 @@
-package com.moac.android.kolotone;
+package com.moac.android.kolotone.model;
 
 public class ElasticAnchor extends Anchor {
 
 	private int kFactor = 1;
 	
-	public ElasticAnchor(int k)
+	public ElasticAnchor(float xpos, float ypos, int k)
 	{
+		super(xpos, ypos);
 		this.kFactor = k;
 	}
 	
