@@ -13,7 +13,7 @@ public class Ball extends AbstractShape {
 
 	public static final String TYPE = "Ball";
 	
-	private float radius = 20;
+	private float radius = 20f;
 	private Paint textPaint;
 
 	public Ball(Anchor anchor, float radius, int color, float xpos, float ypos) {
@@ -31,12 +31,12 @@ public class Ball extends AbstractShape {
 		paint.setXfermode(new PorterDuffXfermode(Mode.SCREEN));
 	}
 
-	public float getRadius() {
+	public double getRadius() {
 		return radius;
 	}
 
 //	@Override
-//	public void checkRebound(float reboundEnergyFactor, float xMax, float yMax) {
+//	public void checkRebound(double reboundEnergyFactor, double xMax, double yMax) {
 //		// Handle rebounding on both sides simultaneously
 //		if (yPos - radius < 0) {
 //			reboundXPos = xPos;
@@ -73,16 +73,16 @@ public class Ball extends AbstractShape {
 	public String getState() {
 		String state = "";
 		state = xPos + "|" + yPos + "|"
-				+ "|" + speed;
+				+ "|" + velocity;
 		return state;
 	}
 
 	// public void restoreState(String state) {
 	// List<String> stateInfo = Arrays.asList(state.split("\\|"));
-	// putOnScreen(Float.parseFloat(stateInfo.get(0)),
-	// Float.parseFloat(stateInfo.get(1)), Float
-	// .parseFloat(stateInfo.get(2)), Float.parseFloat(stateInfo.get(3)), Float
-	// .parseFloat(stateInfo.get(4)), Float.parseFloat(stateInfo.get(5)),
+	// putOnScreen(double.parsedouble(stateInfo.get(0)),
+	// double.parsedouble(stateInfo.get(1)), double
+	// .parsedouble(stateInfo.get(2)), double.parsedouble(stateInfo.get(3)), double
+	// .parsedouble(stateInfo.get(4)), double.parsedouble(stateInfo.get(5)),
 	// Integer
 	// .parseInt(stateInfo.get(6)));
 	// }
@@ -93,8 +93,8 @@ public class Ball extends AbstractShape {
 //				"touched: " + touched);
 
     if (!touched) {
-        xPos += (speed.getXv() * speed.getxDirection());
-        yPos += (speed.getYv() * speed.getyDirection());
+        xPos += (velocity.getXv() * velocity.getxDirection());
+        yPos += (velocity.getYv() * velocity.getyDirection());
     }
 }
 
@@ -109,27 +109,31 @@ public class Ball extends AbstractShape {
 	}
 
 	@Override
-	public void scale(float factor) {
-		// Modifies the radius.
-		this.radius = radius * factor;
+	public void scale(double factor) {
+		// TODO Not implemented yet.
 	}
 	
 	@Override
 	public  void draw(Canvas canvas) {		
 		 canvas.drawCircle(xPos, yPos, radius, this.paint);
-		 canvas.drawText(xPos + "|" + yPos + "|" + speed.getxDirection()
-				 + "|" + speed.getyDirection() + "|" + touched, xPos - radius, yPos, textPaint);
+		 canvas.drawText(xPos + "|" + yPos + "|" + velocity.getxDirection()
+				 + "|" + velocity.getyDirection() + "|" + touched, xPos - radius, yPos, textPaint);
 	}
 
 	@Override
-	public void handleActionDown(int eventX, int eventY) {
+	public boolean handleActionDown(int eventX, int eventY) {
 		Log.d(TAG, "handleActionDown: " 
 				+ " eventX: " + eventX
 				+ " eventY: " + eventY);
 		setTouched(inCircle(eventX, eventY, xPos, yPos, radius));
+		return touched;
 	}
 	
-	private boolean inCircle(float x, float y, float circleCenterX, float circleCenterY, float circleRadius) {
+	public boolean isInside(double x, double y)
+	{
+		return inCircle(x, y, xPos, yPos, radius);
+	}
+	private boolean inCircle(double x, double y, double circleCenterX, double circleCenterY, double circleRadius) {
 	    double dx = Math.pow(x - circleCenterX, 2);
 	    double dy = Math.pow(y - circleCenterY, 2);
 
@@ -141,12 +145,12 @@ public class Ball extends AbstractShape {
 	}
 
 	@Override
-	public float getWidth() {
+	public double getWidth() {
 		return radius * 2; // is diameter
  	}
 
 	@Override
-	public float getHeight() {
+	public double getHeight() {
 		return radius * 2; // is diameter
 	}
 }

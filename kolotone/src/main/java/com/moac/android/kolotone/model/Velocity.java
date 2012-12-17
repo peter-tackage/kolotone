@@ -1,6 +1,6 @@
 package com.moac.android.kolotone.model;
 
-public class Speed {
+public class Velocity {
 
 	public static final int DIRECTION_RIGHT	= 1;
 	public static final int DIRECTION_LEFT	= -1;
@@ -13,12 +13,12 @@ public class Speed {
 	private int xDirection = DIRECTION_RIGHT;
 	private int yDirection = DIRECTION_DOWN;
 
-	public Speed() {
+	public Velocity() {
 		this.xv = 1;
 		this.yv = 1;
 	}
 
-	public Speed(float xv, float yv) {
+	public Velocity(float xv, float yv) {
 		this.xv = xv;
 		this.yv = yv;
 	}

@@ -6,10 +6,6 @@ import android.graphics.Paint;
 
 public abstract class AbstractShape {
 
-	public enum BOUNCE_TYPE {
-		TOPLEFT, TOP, TOPRIGHT, LEFT, RIGHT, BOTTOMLEFT, BOTTOM, BOTTOMRIGHT
-	}
-
 	protected int color = Color.WHITE;
 	protected Paint paint;
 
@@ -18,14 +14,12 @@ public abstract class AbstractShape {
 	protected int mass = 1;
 
 	// Movement
-	protected float xPos = 160;
-	protected float yPos = 240;
-	//protected float xAcceleration = 0;
-	//protected float yAcceleration = 0;
+	protected float xPos = 0;
+	protected float yPos = 0;
 	
-	protected Speed speed;
+	protected Velocity velocity;
 
-	protected float rotation = 0f;
+	protected double rotation = 0d;
 	protected long lastUpdate;
 	protected boolean touched = false;
 
@@ -38,53 +32,47 @@ public abstract class AbstractShape {
 		paint.setColor(color);
 		this.xPos = xpos;
 		this.yPos = ypos;
-		this.speed = new Speed();
+		this.velocity = new Velocity();
 	}
 	
 	abstract public double getArea();
 	abstract public String getType();
+	abstract public void draw(Canvas canvas);
+	abstract public boolean handleActionDown(int eventX, int eventY);	
+	abstract public double getWidth();
+	abstract public double getHeight();
+	abstract public void update();
+	abstract public boolean isInside(double x, double y);
 
+	
 	public int getMass() {
 		return mass;
 	}
 	public void setMass(int mass) {
 		this.mass = mass;
 	}
-	public float getXPos() {
+	public double getXPos() {
 		return xPos;
 	}
 	public void setXPos(float xPos) {
 		this.xPos = xPos;
 	}
-	public float getYPos() {
+	public double getYPos() {
 		return yPos;
 	}
 	public void setYPos(float yPos) {
 		this.yPos = yPos;
 	}
-//	public float getxAcceleration() {
-//		return xAcceleration;
-//	}
-//	public void setxAcceleration(float xAcceleration) {
-//		this.xAcceleration = xAcceleration;
-//	}
-//	public float getyAcceleration() {
-//		return yAcceleration;
-//	}
-//	public void setyAcceleration(float yAcceleration) {
-//		this.yAcceleration = yAcceleration;
-//	}
-//	
-	public Speed getSpeed()
+	
+	public Velocity getVelocity()
 	{
-		return speed;
+		return velocity;
 	}
 	
-	public void setSpeed(Speed speed)
+	public void setVelocity(Velocity v)
 	{
-		this.speed = speed;
+		this.velocity = v;
 	}
-	
 	
 	public void setColor(int color) {
 		this.color = color;
@@ -93,19 +81,17 @@ public abstract class AbstractShape {
 		this.isCollidable = isCollidable;
 	}
 
-	public float getRotation() {
+	public double getRotation() {
 		return rotation;
 	}
-	public void setRotation(float rotation) {
+	public void setRotation(double rotation) {
 		this.rotation = rotation;
 	}
-
-	//abstract public void checkRebound(float reboundEnergyFactor, float xMax, float yMax);
 
 	/*
 	 * 1 is initial size. Range is 0 - infinite.
 	 */
-	abstract public void scale(float factor);
+	abstract public void scale(double factor);
 
 	public int getColor()
 	{
@@ -135,12 +121,5 @@ public abstract class AbstractShape {
 		this.touched = touched;
 	}
 
-	abstract public void draw(Canvas canvas);
-
-	abstract public void handleActionDown(int eventX, int eventY);
-	
-	abstract public float getWidth();
-	abstract public float getHeight();
-	abstract public void update();
 
 }

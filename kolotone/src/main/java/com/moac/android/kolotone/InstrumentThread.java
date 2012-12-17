@@ -84,7 +84,7 @@ public class InstrumentThread extends Thread {
 
 					while (sleepTime < 0 && framesSkipped < MAX_FRAME_SKIPS) {
 						
-						Log.d(TAG, "Catching up on updates");
+					//	Log.d(TAG, "Catching up on updates");
 						
 						// we need to catch up
 						// update without rendering

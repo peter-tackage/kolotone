@@ -2,25 +2,25 @@ package com.moac.android.kolotone.model;
 
 public abstract class Anchor {
 
-	private float xPos = 0;
-    private float yPos = 0;
+	private double xPos = 0;
+    private double yPos = 0;
         
-	public Anchor(float xPos, float yPos) {
+	public Anchor(double xPos, double yPos) {
 		super();
 		this.xPos = xPos;
 		this.yPos = yPos;
 	}
 	
-	public float getxPos() {
+	public double getxPos() {
 		return xPos;
 	}
-	public void setxPos(float xPos) {
+	public void setxPos(double xPos) {
 		this.xPos = xPos;
 	}
-	public float getyPos() {
+	public double getyPos() {
 		return yPos;
 	}
-	public void setyPos(float yPos) {
+	public void setyPos(double yPos) {
 		this.yPos = yPos;
 	}
         
