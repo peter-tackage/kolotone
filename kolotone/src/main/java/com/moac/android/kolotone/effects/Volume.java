@@ -2,12 +2,16 @@ package com.moac.android.kolotone.effects;
 
 import java.util.HashMap;
 
+import android.util.Log;
+
 import com.moac.android.kolotone.instruments.PSND;
 import com.moac.android.kolotone.instruments.Parameter;
 
 
 public  class Volume extends Effect {	
 	
+	public static final String TAG = Volume.class.getSimpleName();
+
 	public Parameter amp; 
 	public Parameter ampglobal;
 	public Parameter on;
@@ -45,6 +49,7 @@ public  class Volume extends Effect {
 
 	
 	public void setVolume(final float val) {
+		Log.d(TAG, "Setting volume to: " + val);
 		ampglobal.pushValue(val);
 	}
 

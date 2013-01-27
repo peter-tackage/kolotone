@@ -3,7 +3,7 @@ package com.moac.android.kolotone.instruments;
 import org.puredata.core.PdBase;
 
 public class Parameter {
-	boolean DEBUGGG = false;
+	boolean DEBUGGG = true;
 	String name;
 	public final static int CONTINUOUS = 0;  //any value from min to max
 	

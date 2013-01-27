@@ -20,7 +20,7 @@ public class AudioStatListener implements PdReceiver{
 
 	@Override
 	public void receiveFloat(final String source, final float x) {
-		Log.d("PDManager", "recieved float! "+source+" : "+x);
+	//	Log.d("PDManager", "recieved float! "+source+" : "+x);
 		if (source.equalsIgnoreCase("mainlevel")) {
 			audiolevel = x;
 		}

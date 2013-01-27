@@ -147,8 +147,9 @@ public class Instrument implements OverlapListener {
 	
 	public void setPitch(final float val) {
 		float pitch = midiMin + ((val+(1/(2*midiMax-2*midiMin))) * (midiMax-midiMin));
+		Log.v(TAG, "Setting pitch: " + val + " to normalised value: " + pitch);
 		pitch = (float)Math.floor(pitch);
-		sendMessage("pitch", pitch, 1);
+		sendMessage("pitch", pitch);
 	}
 
 //	public boolean isCursorSnapped(final Cursor c, final float width) {
@@ -208,6 +209,9 @@ public class Instrument implements OverlapListener {
 			}
 		
 		} catch (final Exception e) { e.printStackTrace(); }
+		
+		Log.d(TAG, "Update setting (non-JSON) " + this.toString());
+
 	}
 	public void updateSettingsFromJSON(JSONObject prefs) {
 		updateSettingsFromJSON(prefs, false, null);
@@ -215,7 +219,7 @@ public class Instrument implements OverlapListener {
 	
 	public void updateSettingsFromJSON(JSONObject prefs, boolean savetoshared, SharedPreferences sprefs) {
 		try {
-			Log.d("INSTRUMENT", "Settings changed!!!!!!!!!!!");
+			Log.d("INSTRUMENT", "Settings changed from JSON!!!!!!!!!!!");
 			Editor edit = sprefs.edit();
 			final float prefMidiMin = prefs.has(PSND.MIDI_MIN) ? prefs.getInt(PSND.MIDI_MIN) : 70;
 			if (savetoshared) edit.putInt(PSND.MIDI_MIN, (int)prefMidiMin);
@@ -237,8 +241,22 @@ public class Instrument implements OverlapListener {
 			if (savetoshared) edit.commit();
 		
 		} catch (final Exception e) { e.printStackTrace(); }
+		
+		Log.d(TAG, this.toString());
 	}
 	
+	@Override
+	public String toString()
+	{
+		return "Instrument is - patch: " + patch
+				+ " patchName: " + patchName
+				+ " isReady: " + ready
+				+ " volume: " + volume
+				+ " waveform: " + waveform
+				+ " midiMin: " + midiMin
+				+ " midiMax: " + midiMax;
+	}
+ 	
 	public JSONObject saveSettingsToJSON(JSONObject prefs) {
 		try {
 			prefs.put(PSND.MIDI_MIN, this.midiMin);
