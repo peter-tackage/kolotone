@@ -21,6 +21,7 @@
   </properties>
 
   <dependencyManagement>
+
     <dependencies>
       <dependency>
         <groupId>com.google.android</groupId>
@@ -28,6 +29,7 @@
         <version>${platform.version}</version>
         <scope>provided</scope>
       </dependency>
+
       <dependency>
         <groupId>com.google.android</groupId>
         <artifactId>android-test</artifactId>
@@ -35,19 +37,6 @@
         <scope>provided</scope>
       </dependency>
 
-      <!-- Androlog is a logging and reporting library for Android -->
-      <dependency>
-        <groupId>de.akquinet.android.androlog</groupId>
-        <artifactId>androlog</artifactId>
-        <version>1.0.5</version>
-      </dependency>
-
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.10</version>
-        <scope>provided</scope>
-      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -57,7 +46,7 @@
         <plugin>
           <groupId>com.jayway.maven.plugins.android.generation2</groupId>
           <artifactId>android-maven-plugin</artifactId>
-          <version>3.1.1</version>
+          <version>3.6.0</version>
           <inherited>true</inherited>
           <configuration>
             <androidManifestFile>${project.basedir}/AndroidManifest.xml
@@ -74,11 +63,10 @@
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>2.3.2</version>
           <inherited>true</inherited>
           <configuration>
-            <source>1.5</source>
-            <target>1.5</target>
+            <source>1.6</source>
+            <target>1.6</target>
           </configuration>
         </plugin>
         <plugin>

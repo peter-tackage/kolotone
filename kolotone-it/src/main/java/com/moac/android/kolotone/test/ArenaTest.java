@@ -24,8 +24,8 @@ public class ArenaTest extends TestCase {
 
         a.update();
 
-        assertEquals(49.0f, b1.getXPos());
-        assertEquals(50.0f, b1.getYPos());
+        assertEquals(49.0d, b1.getXPos(), 0.0);
+        assertEquals(50.0d, b1.getYPos(), 0.0);
     }
 
     public void testMoveRight() {
@@ -41,8 +41,8 @@ public class ArenaTest extends TestCase {
         a.manage(b1);
         a.update();
 
-        assertEquals(51.0f, b1.getXPos());
-        assertEquals(50.0f, b1.getYPos());
+        assertEquals(51.0f, b1.getXPos(), 0.0);
+        assertEquals(50.0f, b1.getYPos(), 0.0);
     }
 
     public void testMoveUp() {
@@ -58,8 +58,8 @@ public class ArenaTest extends TestCase {
         a.manage(b1);
         a.update();
 
-        assertEquals(50.0f, b1.getXPos());
-        assertEquals(49.0f, b1.getYPos());
+        assertEquals(50.0f, b1.getXPos(), 0.0);
+        assertEquals(49.0f, b1.getYPos(), 0.0);
     }
 
     public void testMoveDown() {
@@ -76,8 +76,8 @@ public class ArenaTest extends TestCase {
         a.manage(b1);
         a.update();
 
-        assertEquals(50.0f, b1.getXPos());
-        assertEquals(51.0f, b1.getYPos());
+        assertEquals(50.0f, b1.getXPos(), 0.0);
+        assertEquals(51.0f, b1.getYPos(), 0.0);
     }
 
     public void testReboundLeft() {
@@ -95,13 +95,13 @@ public class ArenaTest extends TestCase {
         a.update();
 
         // Approach edge
-        assertEquals(radius, b1.getXPos());
+        assertEquals(radius, b1.getXPos(), 0.0);
         assertEquals(Velocity.DIRECTION_LEFT, b1.getVelocity().getxDirection());
 
         a.update();
 
         // Detect at edge and sends back the other way
-        assertEquals(radius + 1f, b1.getXPos());
+        assertEquals(radius + 1f, b1.getXPos(), 0.0);
         assertEquals(Velocity.DIRECTION_RIGHT, b1.getVelocity().getxDirection());
 
         for(int i = 2; i < 20; i++) {
@@ -109,7 +109,7 @@ public class ArenaTest extends TestCase {
             a.update();
 
             // Continues back
-            assertEquals(radius + (float) i, b1.getXPos());
+            assertEquals(radius + (float) i, b1.getXPos(), 0.0);
             assertEquals(Velocity.DIRECTION_RIGHT, b1.getVelocity().getxDirection());
         }
     }
