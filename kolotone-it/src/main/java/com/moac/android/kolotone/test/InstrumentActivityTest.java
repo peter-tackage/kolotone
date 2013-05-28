@@ -1,12 +1,12 @@
 package com.moac.android.kolotone.test;
 
 import android.test.ActivityInstrumentationTestCase2;
-import com.moac.android.kolotone.*;
+import com.moac.android.kolotone.InstrumentActivity;
 
 public class InstrumentActivityTest extends ActivityInstrumentationTestCase2<InstrumentActivity> {
 
     public InstrumentActivityTest() {
-        super(InstrumentActivity.class); 
+        super(InstrumentActivity.class);
     }
 
     public void testActivity() {

@@ -1,6 +1,5 @@
 package com.moac.android.kolotone.controller;
 
-
 public class InstrumentController {
 
 //
@@ -46,7 +45,5 @@ public class InstrumentController {
 //					moving = false;
 //			}
 //		}
-
-
 }
 

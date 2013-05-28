@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -59,7 +60,8 @@
                   </libs>
                   <obfuscate>true</obfuscate>
                   <addMavenDescriptor>false</addMavenDescriptor>
-                  <proguardInclude>${project.basedir}/proguard.conf</proguardInclude>
+                  <proguardInclude>${project.basedir}/proguard.conf
+                  </proguardInclude>
                 </configuration>
               </execution>
             </executions>
@@ -100,8 +102,12 @@
             <configuration>
               <zipalign>
                 <verbose>true</verbose>
-                <inputApk>${project.build.directory}/${project.artifactId}-${project.version}.apk</inputApk>
-                <outputApk>${project.build.directory}/${project.artifactId}-${project.version}-signed-aligned.apk</outputApk>
+                <inputApk>
+                  ${project.build.directory}/${project.artifactId}-${project.version}.apk
+                </inputApk>
+                <outputApk>
+                  ${project.build.directory}/${project.artifactId}-${project.version}-signed-aligned.apk
+                </outputApk>
               </zipalign>
               <sign>
                 <debug>false</debug>
