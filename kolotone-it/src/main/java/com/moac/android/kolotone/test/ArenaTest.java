@@ -20,7 +20,7 @@ public class ArenaTest extends TestCase {
         b1.getVelocity().setYv(0f);
         b1.getVelocity().setXv(1f);
 
-        a.manage(b1);
+        a.addShape(b1);
 
         a.update();
 
@@ -38,7 +38,7 @@ public class ArenaTest extends TestCase {
         b1.getVelocity().setYv(0f);
         b1.getVelocity().setXv(1f);
 
-        a.manage(b1);
+        a.addShape(b1);
         a.update();
 
         assertEquals(51.0f, b1.getXPos(), 0.0);
@@ -55,7 +55,7 @@ public class ArenaTest extends TestCase {
         b1.getVelocity().setYv(1f);
         b1.getVelocity().setXv(0f);
 
-        a.manage(b1);
+        a.addShape(b1);
         a.update();
 
         assertEquals(50.0f, b1.getXPos(), 0.0);
@@ -73,7 +73,7 @@ public class ArenaTest extends TestCase {
         b1.getVelocity().setYv(1f);
         b1.getVelocity().setXv(0f);
 
-        a.manage(b1);
+        a.addShape(b1);
         a.update();
 
         assertEquals(50.0f, b1.getXPos(), 0.0);
@@ -91,7 +91,7 @@ public class ArenaTest extends TestCase {
         b1.getVelocity().setYv(0f);
         b1.getVelocity().setXv(1f);
 
-        a.manage(b1);
+        a.addShape(b1);
         a.update();
 
         // Approach edge

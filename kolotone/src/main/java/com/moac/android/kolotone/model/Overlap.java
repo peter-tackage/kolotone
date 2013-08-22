@@ -2,34 +2,33 @@ package com.moac.android.kolotone.model;
 
 public class Overlap {
 
-    AbstractShape s1;
-    AbstractShape s2;
-    double area;
+    private AbstractShape mShape1;
+    private AbstractShape mShape2;
+    private double mArea;
 
-    public Overlap(AbstractShape s1, AbstractShape s2, double area) {
-        super();
-        this.s1 = s1;
-        this.s2 = s2;
-        this.area = area;
+    public Overlap(AbstractShape _s1, AbstractShape _s2, double _area) {
+        mShape1 = _s1;
+        mShape2 = _s2;
+        mArea = _area;
     }
 
     public AbstractShape getShape1() {
-        return s1;
+        return mShape1;
     }
 
     public AbstractShape getShape2() {
-        return s2;
+        return mShape2;
     }
 
     public double getArea() {
-        return area;
+        return mArea;
     }
 
-    public boolean involves(AbstractShape sa, AbstractShape sb) {
-        return involves(sa) && involves(sb);
+    public boolean involves(AbstractShape _s1, AbstractShape _s2) {
+        return involves(_s1) && involves(_s2);
     }
 
-    public boolean involves(AbstractShape s) {
-        return (s1 == s) || (s2 == s);
+    public boolean involves(AbstractShape _s) {
+        return (mShape1 == _s) || (mShape2 == _s);
     }
 }

@@ -12,7 +12,7 @@ public class NonPDParameter extends Parameter {
      * @param value
      */
     public void pushNormalValue(final float value) {
-        if(DEBUGGG) System.out.println("Setting " + this.name + " to:" + value);
+        if(DEBUG) System.out.println("Setting " + this.name + " to:" + value);
     }
 
     /**
@@ -22,7 +22,7 @@ public class NonPDParameter extends Parameter {
      * @param num
      */
     public void pushNormalValue(final float value, final int num) {
-        if(DEBUGGG)
+        if(DEBUG)
             System.out.println("Setting " + this.name + "[" + num + "] to:" + value);
     }
 

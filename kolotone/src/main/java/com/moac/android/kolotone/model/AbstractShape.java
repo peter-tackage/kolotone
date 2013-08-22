@@ -6,123 +6,68 @@ import android.graphics.Paint;
 
 public abstract class AbstractShape {
 
-    protected int color = Color.WHITE;
-    protected Paint paint;
+    protected int mColor = Color.WHITE;
+    protected Paint mPaint;
 
-    protected boolean isCollidable = false;
-    protected Anchor anchor = null;
-    protected int mass = 1;
+    protected boolean mIsCollidable = false;
+    protected Anchor mAnchor = null;
+    protected int mMass = 1;
 
     // Movement
-    protected float xPos = 0;
-    protected float yPos = 0;
+    protected float mXPos = 0;
+    protected float mYPos = 0;
 
-    protected Velocity velocity;
+    protected Velocity mVelocity;
 
-    protected double rotation = 0d;
-    protected long lastUpdate;
-    protected boolean touched = false;
+    protected double mRotation = 0d;
+    protected long mLastUpdatedAt;
+    protected boolean mIsTouched = false;
 
-    public AbstractShape(int color, float xpos, float ypos) {
-        this.lastUpdate = System.currentTimeMillis();
-        this.color = color;
-        this.paint = new Paint();
-        paint.setColor(color);
-        this.xPos = xpos;
-        this.yPos = ypos;
-        this.velocity = new Velocity();
+    public AbstractShape(int _color, float _xpos, float _ypos) {
+        mLastUpdatedAt = System.currentTimeMillis();
+        mColor = _color;
+        mPaint = new Paint();
+        mPaint.setColor(_color);
+        mXPos = _xpos;
+        mYPos = _ypos;
+        mVelocity = new Velocity();
     }
 
     abstract public double getArea();
-
     abstract public String getType();
-
     abstract public void draw(Canvas canvas);
-
     abstract public boolean handleActionDown(int eventX, int eventY);
-
     abstract public double getWidth();
-
     abstract public double getHeight();
-
     abstract public void update();
+    abstract public void scale(double factor);
 
     abstract public boolean isInside(double x, double y);
 
-    public int getMass() {
-        return mass;
-    }
+    public int getMass() { return mMass; }
+    public void setMass(int mass) { mMass = mass; }
 
-    public void setMass(int mass) {
-        this.mass = mass;
-    }
+    public double getXPos() { return mXPos; }
+    public void setXPos(float xPos) { mXPos = xPos; }
 
-    public double getXPos() {
-        return xPos;
-    }
+    public double getYPos() { return mYPos; }
+    public void setYPos(float yPos) { mYPos = yPos; }
 
-    public void setXPos(float xPos) {
-        this.xPos = xPos;
-    }
+    public Velocity getVelocity() { return mVelocity; }
+    public void setVelocity(Velocity v) { mVelocity = v; }
 
-    public double getYPos() {
-        return yPos;
-    }
+    public void setColor(int color) { mColor = color; }
+    public int getColor() {return mColor; }
 
-    public void setYPos(float yPos) {
-        this.yPos = yPos;
-    }
+    public boolean isCollidable() {return mIsCollidable;}
+    public void setIsCollidable(boolean isCollidable) { mIsCollidable = isCollidable; }
 
-    public Velocity getVelocity() {
-        return velocity;
-    }
+    public double getRotation() { return mRotation; }
+    public void setRotation(double rotation) { mRotation = rotation; }
 
-    public void setVelocity(Velocity v) {
-        this.velocity = v;
-    }
+    public Anchor getAnchor() { return mAnchor; }
+    public void setAnchor(Anchor anchor) { mAnchor = anchor; }
 
-    public void setColor(int color) {
-        this.color = color;
-    }
-
-    public void setCollidable(boolean isCollidable) {
-        this.isCollidable = isCollidable;
-    }
-
-    public double getRotation() {
-        return rotation;
-    }
-
-    public void setRotation(double rotation) {
-        this.rotation = rotation;
-    }
-
-    /*
-     * 1 is initial size. Range is 0 - infinite.
-     */
-    abstract public void scale(double factor);
-
-    public int getColor() {
-        return this.color;
-    }
-
-    public boolean isCollidable() {
-        return this.isCollidable;
-    }
-
-    public Anchor getAnchor() {
-        return this.anchor;
-    }
-
-    public void setAnchor(Anchor anchor) {
-        this.anchor = anchor;
-    }
-
-    public boolean isTouched() {
-        return touched;
-    }
-
-    public void setTouched(boolean touched) {
-        this.touched = touched;
-    }
+    public boolean isTouched() { return mIsTouched; }
+    public void setIsTouched(boolean isTouched) {mIsTouched = isTouched;}
 }

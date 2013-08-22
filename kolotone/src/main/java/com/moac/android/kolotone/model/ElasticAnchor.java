@@ -4,9 +4,9 @@ public class ElasticAnchor extends Anchor {
 
     private int kFactor = 1;
 
-    public ElasticAnchor(float xpos, float ypos, int k) {
-        super(xpos, ypos);
-        this.kFactor = k;
+    public ElasticAnchor(float _xpos, float _ypos, int _kFactor) {
+        super(_xpos, _ypos);
+        this.kFactor = _kFactor;
     }
 
     public int getKFactor() {

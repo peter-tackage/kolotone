@@ -14,69 +14,66 @@ public class Arena {
     // Physics engine uses.
 
     protected double density = 2d; // px/m
-    protected double reboundEnergyFactor = 0.6d; // Amount of energy returned
+    protected double mReboundEnergyFactor = 0.6d; // Amount of energy returned
 
-    private List<AbstractShape> objects = new ArrayList<AbstractShape>();
-    private double xMax;
+    private List<AbstractShape> mShapes = new ArrayList<AbstractShape>();
+    private double mXMax;
     private double yMax;
 
-    private List<OverlapListener> olListeners = new ArrayList<OverlapListener>();
+    private List<OverlapListener> mOverlapListeners = new ArrayList<OverlapListener>();
 
-    public Arena(double reboundEnergyFactor, double density, double xMax,
-                 double yMax) {
+    public Arena(double _reboundEnergyFactor, double _density, double _xMax,
+                 double _yMax) {
 
-        this.reboundEnergyFactor = reboundEnergyFactor;
-        this.density = density;
-        this.xMax = xMax;
-        this.yMax = yMax;
+        this.mReboundEnergyFactor = _reboundEnergyFactor;
+        this.density = _density;
+        this.mXMax = _xMax;
+        this.yMax = _yMax;
 
         Log.d(TAG, "Creating Arena: " +
-          " reboundEnergyFactor: " + reboundEnergyFactor +
-          " density: " + density +
-          " xMax: " + xMax +
-          " yMax: " + yMax);
+          " reboundEnergyFactor: " + _reboundEnergyFactor +
+          " density: " + _density +
+          " mXMax: " + _xMax +
+          " yMax: " + _yMax);
     }
 
     public double getReboundEnergyFactor() {
-        return reboundEnergyFactor;
+        return mReboundEnergyFactor;
     }
 
     public double getDensity() {
         return density;
     }
 
-    public double getxMax() {
-        return xMax;
+    public double getXMax() {
+        return mXMax;
     }
 
     public double getyMax() {
         return yMax;
     }
 
-    public List<AbstractShape> getObjects() {
-        return this.objects;
+    public List<AbstractShape> getShapes() {
+        return mShapes;
     }
 
-    public void manage(AbstractShape obj) {
-        Log.i(TAG, "Managing new shape: " + obj.getType() + " total: " + objects.size());
-        this.objects.add(obj);
+    public void addShape(AbstractShape _shape) {
+        Log.i(TAG, "Adding shape: " + _shape.getType() + " total: " + mShapes.size());
+        mShapes.add(_shape);
     }
 
-    public void unmanage(AbstractShape obj) {
-        Log.i(TAG, "Unmanaging shape: " + obj.getType() + " total: " + objects.size());
-        this.objects.remove(obj);
+    public void removeShape(AbstractShape _shape) {
+        Log.i(TAG, "Removing shape: " + _shape.getType() + " total: " + mShapes.size());
+        mShapes.remove(_shape);
     }
 
+    // TODO Use rebound coefficient
     // TODO Use wall dampening
     public void update() {
-
-        //	Log.i(TAG, "Updating Arena: total objects: "  + objects.size());
-
-        // TODO Use rebound coefficient
-        for(AbstractShape obj : objects) {
+        for(AbstractShape obj : mShapes) {
             // check collision with right wall if heading right
             if(obj.getVelocity().getxDirection() == Velocity.DIRECTION_RIGHT
-              && obj.getXPos() + obj.getWidth() / 2 >= xMax) {
+              && obj.getXPos() + obj.getWidth() / 2 >= mXMax) {
                 obj.getVelocity().toggleXDirection();
             }
             // check collision with left wall if heading left
@@ -107,11 +104,11 @@ public class Arena {
         List<Overlap> overlaps = new ArrayList<Overlap>();
 
         SIDE_A:
-        for(AbstractShape s1 : objects) {
+        for(AbstractShape s1 : mShapes) {
             Ball b1 = (Ball) s1;
 
             SIDE_B:
-            for(AbstractShape s2 : objects) {
+            for(AbstractShape s2 : mShapes) {
 
                 // Now cast them to circles
                 Ball b2 = (Ball) s2;
@@ -145,90 +142,25 @@ public class Arena {
             }
 
             // Now iterate through the listeners and report overlaps to them.
-            for(OverlapListener ol : olListeners) {
+            for(OverlapListener ol : mOverlapListeners) {
                 // TODO On a different thread??
                 ol.notifyOverlap(overlaps);
             }
         }
     }
 
-	/*
-     * A = 1/2
-	 */
-    //	public void update(float delta)
-    //	{
-    //		for (AbstractShape obj: objects)
-    //		{
-    //			// TODO update
-    //
-    //			float newXVelocity = obj.getxVelocity() + (delta * obj.getxAcceleration() / 1000) * density;
-    //			float newYVelocity = obj.getyVelocity() + (delta * obj.getyAcceleration() / 1000) * density;
-    //
-    //			obj.setxVelocity(newXVelocity);
-    //			obj.setyVelocity(newYVelocity);
-    //
-    //			float newxPos = obj.getXPos() + ((obj.getxVelocity() * delta) / 1000) * density;
-    //			float newyPos = obj.getYPos() + ((obj.getyVelocity() * delta) / 1000) * density;
-    //
-    //			obj.setXPos(newxPos);
-    //			obj.setYPos(newyPos);
-    //
-    //			// Reset external force
-    //			obj.setxAcceleration(0f);
-    //			obj.setyAcceleration(0f);
-    //
-    //			// Check for rebound from world edges.
-    //			obj.checkRebound(xMax, yMax,
-    //					reboundEnergyFactor);
-    //
-    //
-    //		}
-    //	}
-
-    private void reportOverlap() {
-
-    }
-
     public void draw(Canvas canvas) {
-        //	Log.i(TAG, "Drawing Arena: total objects: "  + objects.size());
-
-        for(AbstractShape shape : objects) {
+        for(AbstractShape shape : mShapes) {
             shape.draw(canvas);
         }
     }
 
     public void addOverlapListener(OverlapListener ol) {
         if(ol != null)
-            olListeners.add(ol);
+            mOverlapListeners.add(ol);
     }
 
     public void removeOverlapListener(OverlapListener ol) {
-        olListeners.remove(ol);
+        mOverlapListeners.remove(ol);
     }
-
-//	public Overlap getOverlap(AbstractShape s1, AbstractShape s2)
-//	{
-//		for (Overlap o: overlaps)
-//		{
-//			if (o.involves(s1, s2))
-//			{
-//				return o;
-//			}
-//		}
-//		return null;
-//	}
-//	
-//	public List<Overlap> getOverlaps(AbstractShape s)
-//	{
-//		List<Overlap> result = new ArrayList<Overlap>();
-//		
-//		for (Overlap o: overlaps)
-//		{
-//			if (o.involves(s)) 
-//			{
-//				result.add(o);
-//			}
-//		}
-//		return result;
-//	}
 }

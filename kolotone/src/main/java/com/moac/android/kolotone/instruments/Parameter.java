@@ -3,7 +3,7 @@ package com.moac.android.kolotone.instruments;
 import org.puredata.core.PdBase;
 
 public class Parameter {
-    boolean DEBUGGG = true;
+    boolean DEBUG = true;
     String name;
     public final static int CONTINUOUS = 0;  //any value from min to max
 
@@ -101,7 +101,7 @@ public class Parameter {
      */
     public void pushNormalValue(final float value) {
         PdBase.sendFloat(getParamName(), value);
-        if(DEBUGGG) System.out.println("Setting " + this.name + " to:" + value);
+        if(DEBUG) System.out.println("Setting " + this.name + " to:" + value);
     }
 
     /**
@@ -112,7 +112,7 @@ public class Parameter {
      */
     public void pushNormalValue(final float value, final int num) {
         PdBase.sendFloat(getParamName(num), value);
-        if(DEBUGGG)
+        if(DEBUG)
             System.out.println("Setting " + this.name + "[" + num + "] to:" + value);
     }
 

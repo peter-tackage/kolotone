@@ -5,9 +5,9 @@
   android:layout_height="match_parent"
   tools:context=".InstrumentActivity">
 
-  <TextView
+  <fragment
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/app_name" />
-
+    android:layout_height="match_parent"
+    android:name="com.moac.android.kolotone.fragment.InstrumentFragment"
+    android:id="@+id/fragment" />
 </LinearLayout>
